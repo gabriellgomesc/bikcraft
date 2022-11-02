@@ -1,0 +1,118 @@
+[data-menu="button"] {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .js [data-menu="button"] {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: var(--cor-0);
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    z-index: 3;
+    font: 400 18px/1.5 "Roboto", sans-serif;
+  }
+
+  .js [data-menu="button"]::after {
+    content: "";
+    display: inline-block;
+    height: 2px;
+    width: 14px;
+    background: var(--cor-0);
+    box-shadow: 0 4px #fff, 0 -4px #fff;
+    transition: 0.3s;
+    border-radius: 1px;
+  }
+
+  .js [data-menu="button"].active::after {
+    transform: rotate(180deg);
+    box-shadow: none;
+  }
+
+  .js [data-menu="lista"] {
+    display: none;
+    position: absolute;
+    background: var(--cor-9);
+    width: 160px;
+    right: 20px;
+    border-radius: 4px;
+    padding: 12px;
+    box-shadow: -2px 2px 2px 0 rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+
+  .js [data-menu="lista"].active {
+    display: block;
+    animation: showMenu 0.3s forwards;
+  }
+  
+  .js [data-menu="lista"].desactive {
+    display: block;
+    animation: hiddenMenu 0.3s forwards;
+  }
+
+  .js [data-menu="lista"] li a {
+    display: block;
+    padding: 12px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .js [data-menu="lista"] li {
+    border-bottom: 1px solid var(--cor-8);
+  }
+  
+  .js [data-menu="lista"] li:last-child {
+    border: none;
+  }
+
+  @media (max-width: 450px) {
+    .js [data-menu="button"]::after {
+      height: 3px;
+      width: 20px;
+      box-shadow: 0 6px #fff, 0 -6px #fff;
+      border-radius: 3px;
+    }
+
+    .js [data-menu="button"] {
+      background: transparent;
+      border: none;
+      padding: 20px;
+      border-radius: 4px;
+    }
+
+    .js [data-menu="button"] span {
+      display: none;
+    }
+  }
+
+  @keyframes showMenu {
+    from {
+      opacity: 0;
+      transform: translate3d(-30px, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes hiddenMenu {
+    from {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(-30px, 0, 0);
+    }
+  }
+}

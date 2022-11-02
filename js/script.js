@@ -66,4 +66,50 @@ if (window.SimpleAnime) {
   new SimpleAnime();
 }
 
-// menu
+// menu mobile
+function initMenu() {
+  const menuButton = document.querySelector(`[data-menu="button"]`)
+  const menuLista = document.querySelector(`[data-menu="lista"]`)
+  const clique = ['click']
+  if (menuButton) {
+    function openMenu() {
+      menuLista.classList.remove('desactive')
+      menuButton.classList.remove('desactive')
+      menuLista.classList.add('active')
+      menuButton.classList.add('active')
+      outsideClick(menuLista, clique, () => {
+        menuLista.classList.remove(`active`)
+        menuButton.classList.remove(`active`)
+        menuLista.classList.add('desactive')
+      menuButton.classList.add('desactive')
+      })
+    }
+    clique.forEach((evento) => {
+      menuButton.addEventListener(evento, openMenu)
+    })
+  }
+}
+initMenu()
+
+// outside click
+function outsideClick(element, events, callback) {
+  const html = document.documentElement
+  const outside = 'data-outside'
+
+  if (!element.hasAttribute(outside)) {
+    events.forEach(userEvent => {
+      setTimeout(() => { html.addEventListener(userEvent, handleOusideClick) })
+    })
+    element.setAttribute(outside, '')
+  }
+  function handleOusideClick(event) {
+    if (!element.contains(event.target)) {
+      element.removeAttribute(outside)
+      events.forEach(userEvent => {
+        html.removeEventListener(userEvent, handleOusideClick)
+      })
+      callback()
+    }
+  }
+}
+outsideClick()
